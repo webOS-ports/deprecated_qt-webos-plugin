@@ -1,0 +1,3 @@
+webos.pro.user
+*.o
+moc_*

@@ -67,7 +67,23 @@ void HybrisCompositorClient::init()
         return;
     }
 
+    m_socketNotifier = new QSocketNotifier(m_socketFd, QSocketNotifier::Read, this);
+    connect(m_socketNotifier, SIGNAL(activated(int)), this, SLOT(onIncomingData()));
+
     emit serverConnected();
+}
+
+void HybrisCompositorClient::onIncomingData()
+{
+    char buffer;
+    int ret;
+
+    ret = read(m_socketFd, &buffer, 1);
+    if (ret <= 0) {
+        close(m_socketFd);
+        m_socketFd = -1;
+        emit serverDisconnected();
+    }
 }
 
 void HybrisCompositorClient::postBuffer(int winId, OffscreenNativeWindowBuffer *buffer)

@@ -19,6 +19,7 @@
 #define HYBRISCOMPOSITORCLIENT_H
 
 #include <QObject>
+#include <QSocketNotifier>
 #include <glib.h>
 #include <string>
 
@@ -37,9 +38,13 @@ signals:
     void serverDisconnected();
     void serverConnected();
 
+private slots:
+    void onIncomingData();
+
 private:
     int m_socketFd;
     std::string m_socketPath;
+    QSocketNotifier *m_socketNotifier;
 
 private Q_SLOTS:
     void init();

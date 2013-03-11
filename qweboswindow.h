@@ -18,6 +18,7 @@
 #ifndef QWEBOSWINDOW_H
 #define QWEBOSWINDOW_H
 
+#include <QSystemSemaphore>
 #include <QPlatformWindow>
 #include <QtGui/QWidget>
 
@@ -56,6 +57,7 @@ public:
     void setVisible(bool visible);
 
     virtual void postBuffer(OffscreenNativeWindowBuffer *buffer);
+    virtual void waitForBuffer(OffscreenNativeWindowBuffer *buffer);
 
     void createGLContext();
 
@@ -79,6 +81,7 @@ private:
     WebosSurfaceManagerClient *m_client;
     QWebOSIpcClient *m_ipcClient;
     bool m_isWebAppMgr;
+    QSystemSemaphore *m_bufferSemaphore;
 };
 
 QT_END_NAMESPACE

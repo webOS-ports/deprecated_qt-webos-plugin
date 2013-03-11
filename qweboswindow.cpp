@@ -45,7 +45,8 @@ QWebOSWindow::QWebOSWindow(QWebOSIpcClient *ipcClient, WebosSurfaceManagerClient
       m_client(client),
       m_ipcClient(ipcClient),
       m_winid(-1),
-      m_isWebAppMgr(false)
+      m_isWebAppMgr(false),
+      m_bufferSemaphore(0)
 {
     m_isWebAppMgr = (::getenv("QT_WEBOS_WEBAPPMGR") != 0);
 }
@@ -84,6 +85,18 @@ void QWebOSWindow::createGLContext()
 
     if (m_glcontext == 0 && format.windowApi() == QPlatformWindowFormat::OpenGL)
         m_glcontext = new QWebOSGLContext( const_cast<QWebOSWindow*>(this) );
+}
+
+void QWebOSWindow::waitForBuffer(OffscreenNativeWindowBuffer *buffer)
+{
+    if (m_winid == -1)
+        return;
+
+    if (!m_bufferSemaphore) {
+        m_bufferSemaphore = new QSystemSemaphore(QString("EGLWindow%1").arg(m_winid), 3, QSystemSemaphore::Create);
+    }
+
+    m_bufferSemaphore->acquire();
 }
 
 void QWebOSWindow::postBuffer(OffscreenNativeWindowBuffer *buffer)
@@ -233,14 +246,14 @@ void QWebOSWindow::setVisible(bool visible)
             qWarning() << "not connected to window manager...";
             return;
         }
-        
+
         if (visible) {
             QSize size = geometry().size();
             channel()->sendSyncMessage(new ViewHost_PrepareAddWindow((1 << 1),
                 size.width(), size.height(), &m_winid));
-            
+
             m_ipcClient->addWindow(this);
-            
+
             std::string winProps = "{ "
                     " 'fullScreen': false, " // defaults to false
                     " 'overlayNotificationsPosition': 'bottom', " // options are left, right, top, bottom
@@ -253,7 +266,7 @@ void QWebOSWindow::setVisible(bool visible)
             channel()->sendAsyncMessage(new ViewHost_SetWindowProperties(winId(), winProps));
             channel()->sendAsyncMessage(new ViewHost_AddWindow(winId()));
             channel()->sendAsyncMessage(new ViewHost_FocusWindow(winId()));
-            
+
             setGeometry(QRect(QPoint(), size));
         }
     }

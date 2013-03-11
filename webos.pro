@@ -59,5 +59,11 @@ QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions
 
 QMAKE_CLEAN += libqwebos.so
 
+STAGING_INCDIR = $$(STAGING_INCDIR)
+isEmpty(STAGING_INCDIR):STAGING_INCDIR = $$(STAGING_DIR)/include
+
+STAGING_LIBDIR = $$(STAGING_LIBDIR)
+isEmpty(STAGING_LIBDIR):STAGING_LIBDIR = $$(STAGING_DIR)/lib
+
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target

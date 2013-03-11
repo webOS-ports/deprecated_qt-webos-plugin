@@ -2,7 +2,7 @@ TARGET = qwebos
 TEMPLATE = lib
 CONFIG += plugin warn_off
 
-QT += opengl core-private gui-private opengl-private xml
+QT += opengles2 xml
 QTDIR_build:DESTDIR = $$QT_BUILD_TREE/plugins/platforms
 
 #include(externalplugin.pri)

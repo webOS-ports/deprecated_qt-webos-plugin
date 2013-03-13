@@ -46,9 +46,7 @@ QWebOSWindow::QWebOSWindow(QWebOSIpcClient *ipcClient, HybrisCompositorClient *c
       m_winid(-1),
       m_isWebAppMgr(false)
 {
-    qDebug() << __PRETTY_FUNCTION__;
     m_isWebAppMgr = (::getenv("QT_WEBOS_WEBAPPMGR") != 0);
-    qDebug() << __PRETTY_FUNCTION__ << "2";
 }
 
 void QWebOSWindow::setGeometry(const QRect& rect)

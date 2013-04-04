@@ -25,7 +25,8 @@
 #include "qwebosclipboard.h"
 #include "qwebosfontdatabase.h"
 #include "qwebosnativeinterface.h"
-#include "hybriscompositorclient.h"
+
+#include <HybrisCompositorClient.h>
 
 #include <QDebug>
 #include <QtGui/QPlatformWindow>

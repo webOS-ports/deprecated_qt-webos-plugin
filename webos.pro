@@ -21,7 +21,6 @@ SOURCES =   main.cpp \
             qwebosfontdatabase.cpp \
             qwebosglcontext.cpp \
             qwebosnativeinterface.cpp \
-            hybriscompositorclient.cpp \
             qwebosipcclient.cpp
 
 HEADERS =   qwebosintegration.h \
@@ -31,7 +30,6 @@ HEADERS =   qwebosintegration.h \
             qwebosfontdatabase.h \
             qwebosglcontext.h \
             qwebosnativeinterface.h \
-            hybriscompositorclient.h \
             qwebosipcclient.h
 
 # EGL convenience
@@ -52,8 +50,7 @@ INCLUDEPATH += $$QT_BUILD_TREE/include/QtGui
 INCLUDEPATH += $$QT_BUILD_TREE/include/QtCore
 SOURCES += $$QT_SOURCE_TREE/src/gui/text/qfontengine_ft.cpp
 
-INCLUDEPATH += $$(STAGING_INCDIR)/ime \
-               $$(STAGING_INCDIR)/sysmgr-ipc
+LIBS += -lWebosHybrisCompositor
 
 QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions
 
@@ -62,8 +59,9 @@ QMAKE_CLEAN += libqwebos.so
 STAGING_INCDIR = $$(STAGING_INCDIR)
 isEmpty(STAGING_INCDIR):STAGING_INCDIR = $$(STAGING_DIR)/include
 
-STAGING_LIBDIR = $$(STAGING_LIBDIR)
-isEmpty(STAGING_LIBDIR):STAGING_LIBDIR = $$(STAGING_DIR)/lib
+INCLUDEPATH += $$(STAGING_INCDIR)/ime \
+               $$(STAGING_INCDIR)/sysmgr-ipc \
+               $$(STAGING_INCDIR)/WebosHybrisCompositor
 
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target

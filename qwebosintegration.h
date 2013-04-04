@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-#include "hybriscompositorclient.h"
+#include <HybrisCompositorClient.h>
 
 QT_BEGIN_HEADER
 

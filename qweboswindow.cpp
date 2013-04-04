@@ -24,7 +24,8 @@
 #include "qweboswindow.h"
 #include "qwebosscreen.h"
 #include "qwebosglcontext.h"
-#include "hybriscompositorclient.h"
+
+#include <HybrisCompositorClient.h>
 
 #define MESSAGES_INTERNAL_FILE "SysMgrMessagesInternal.h"
 #include <PIpcMessageMacros.h>

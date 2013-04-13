@@ -11,7 +11,7 @@ INCLUDEPATH += $$QT_SOURCE_TREE/src/3rdparty/harfbuzz/src
 DEFINES += QT_NO_FONTCONFIG
 
 CONFIG += link_pkgconfig
-PKGCONFIG += glib-2.0 freetype2 LunaSysMgrIpc
+PKGCONFIG += glib-2.0 freetype2 LunaSysMgrIpc WebosHybrisCompositor
 
 SOURCES =   main.cpp \
             qwebosintegration.cpp \
@@ -60,8 +60,7 @@ STAGING_INCDIR = $$(STAGING_INCDIR)
 isEmpty(STAGING_INCDIR):STAGING_INCDIR = $$(STAGING_DIR)/include
 
 INCLUDEPATH += $$(STAGING_INCDIR)/ime \
-               $$(STAGING_INCDIR)/sysmgr-ipc \
-               $$(STAGING_INCDIR)/WebosHybrisCompositor
+               $$(STAGING_INCDIR)/sysmgr-ipc
 
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target

@@ -65,3 +65,8 @@ INCLUDEPATH += $$(STAGING_INCDIR)/ime \
 
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target
+
+INSTALLS += headers
+headers.path = $${STAGING_INCDIR}/qt-webos-plugin
+headers.files += \
+           qweboswindow.h

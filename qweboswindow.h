@@ -30,6 +30,8 @@ QT_BEGIN_NAMESPACE
 #include <SysMgrKeyEventTraits.h>
 #include <SysMgrTouchEventTraits.h>
 
+#include <OffscreenNativeWindow.h>
+
 typedef WId QWebOSWindowId;
 
 class HybrisCompositorClient;

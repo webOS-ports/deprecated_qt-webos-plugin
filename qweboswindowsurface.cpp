@@ -26,7 +26,6 @@
 #include <QtOpenGL/private/qglpaintdevice_p.h>
 #include <QWindowSystemInterface>
 #include <QDebug>
-//#include <palmimedefines.h>
 
 QT_BEGIN_NAMESPACE
 

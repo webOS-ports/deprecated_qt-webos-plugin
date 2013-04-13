@@ -56,16 +56,10 @@ QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions
 
 QMAKE_CLEAN += libqwebos.so
 
-STAGING_INCDIR = $$(STAGING_INCDIR)
-isEmpty(STAGING_INCDIR):STAGING_INCDIR = $$(STAGING_DIR)/include
-
-INCLUDEPATH += $$(STAGING_INCDIR)/ime \
-               $$(STAGING_INCDIR)/sysmgr-ipc
-
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target
 
 INSTALLS += headers
-headers.path = $${STAGING_INCDIR}/qt-webos-plugin
+headers.path = /usr/include/qt-webos-plugin
 headers.files += \
            qweboswindow.h

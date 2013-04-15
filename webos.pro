@@ -58,8 +58,3 @@ QMAKE_CLEAN += libqwebos.so
 
 target.path += $$[QT_INSTALL_PLUGINS]/platforms
 INSTALLS += target
-
-INSTALLS += headers
-headers.path = /usr/include/qt-webos-plugin
-headers.files += \
-           qweboswindow.h

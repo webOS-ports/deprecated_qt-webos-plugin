@@ -48,9 +48,9 @@ public:
     QWebOSWindow(QWebOSIpcClient *ipcClient, HybrisCompositorClient *client, QWidget *w, QWebOSScreen *screen);
 
     virtual void setGeometry(const QRect &);
-    WId winId() const;
 
-    void setWinId(int winId) { m_winid = winId; }
+    WId winId() const;
+    virtual void setWinId(WId winId);
 
     QPlatformGLContext *glContext() const;
     void setVisible(bool visible);

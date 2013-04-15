@@ -60,6 +60,11 @@ void QWebOSWindow::setGeometry(const QRect& rect)
     QPlatformWindow::setGeometry(rect);
 }
 
+void QWebOSWindow::setWinId(WId winId)
+{
+    m_winid = winId;
+}
+
 WId QWebOSWindow::winId() const
 {
     return m_winid;

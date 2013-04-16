@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-#include <HybrisCompositorClient.h>
+#include <WebosSurfaceManagerClient.h>
 
 QT_BEGIN_HEADER
 
@@ -59,7 +59,7 @@ private:
     QWebOSScreen *m_primaryScreen;
     QWebOSClipboard *m_clipboard;
     QWebOSNativeInterface *m_nativeInterface;
-    HybrisCompositorClient m_compositorClient;
+    WebosSurfaceManagerClient m_surfaceClient;
     GMainContext *m_context;
     GMainLoop *m_mainLoop;
     QWebOSIpcClient *m_ipcClient;

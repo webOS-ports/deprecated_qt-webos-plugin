@@ -26,7 +26,7 @@
 #include "qwebosfontdatabase.h"
 #include "qwebosnativeinterface.h"
 
-#include <HybrisCompositorClient.h>
+#include <WebosSurfaceManagerClient.h>
 
 #include <QDebug>
 #include <QtGui/QPlatformWindow>
@@ -96,7 +96,7 @@ QPlatformWindow *QWebOSIntegration::createPlatformWindow(QWidget *widget, WId wi
 {
     qDebug() << __PRETTY_FUNCTION__;
     Q_UNUSED(winId);
-    return new QWebOSWindow(m_ipcClient, &m_compositorClient, widget, m_primaryScreen);
+    return new QWebOSWindow(m_ipcClient, &m_surfaceClient, widget, m_primaryScreen);
 }
 
 

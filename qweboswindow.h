@@ -34,7 +34,7 @@ QT_BEGIN_NAMESPACE
 
 typedef WId QWebOSWindowId;
 
-class HybrisCompositorClient;
+class WebosSurfaceManagerClient;
 class QWebOSScreen;
 class QWebOSGLContext;
 class QSystemSemaphore;
@@ -45,7 +45,7 @@ class QWebOSWindow : public QPlatformWindow,
                      public OffscreenNativeWindow
 {
 public:
-    QWebOSWindow(QWebOSIpcClient *ipcClient, HybrisCompositorClient *client, QWidget *w, QWebOSScreen *screen);
+    QWebOSWindow(QWebOSIpcClient *ipcClient, WebosSurfaceManagerClient *client, QWidget *w, QWebOSScreen *screen);
 
     virtual void setGeometry(const QRect &);
 
@@ -76,7 +76,7 @@ private:
     QWebOSScreen *m_screen;
     QWebOSGLContext *m_glcontext;
     WId m_winid;
-    HybrisCompositorClient *m_client;
+    WebosSurfaceManagerClient *m_client;
     QWebOSIpcClient *m_ipcClient;
     bool m_isWebAppMgr;
 };

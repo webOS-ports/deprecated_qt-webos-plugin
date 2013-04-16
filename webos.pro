@@ -11,7 +11,7 @@ INCLUDEPATH += $$QT_SOURCE_TREE/src/3rdparty/harfbuzz/src
 DEFINES += QT_NO_FONTCONFIG
 
 CONFIG += link_pkgconfig
-PKGCONFIG += glib-2.0 freetype2 LunaSysMgrIpc WebosHybrisCompositor
+PKGCONFIG += glib-2.0 freetype2 LunaSysMgrIpc webos-gui
 
 SOURCES =   main.cpp \
             qwebosintegration.cpp \
@@ -49,8 +49,6 @@ INCLUDEPATH += $$QT_BUILD_TREE/include/QtOpenGL
 INCLUDEPATH += $$QT_BUILD_TREE/include/QtGui
 INCLUDEPATH += $$QT_BUILD_TREE/include/QtCore
 SOURCES += $$QT_SOURCE_TREE/src/gui/text/qfontengine_ft.cpp
-
-LIBS += -lWebosHybrisCompositor
 
 QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions
 

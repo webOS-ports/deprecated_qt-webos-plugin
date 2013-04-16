@@ -25,7 +25,7 @@
 #include "qwebosscreen.h"
 #include "qwebosglcontext.h"
 
-#include <HybrisCompositorClient.h>
+#include <WebosSurfaceManagerClient.h>
 
 #define MESSAGES_INTERNAL_FILE "SysMgrMessagesInternal.h"
 #include <PIpcMessageMacros.h>
@@ -37,7 +37,7 @@ QT_BEGIN_NAMESPACE
 
 #define Q_WEBOS_DEBUG 1
 
-QWebOSWindow::QWebOSWindow(QWebOSIpcClient *ipcClient, HybrisCompositorClient *client, QWidget *widget, QWebOSScreen *screen)
+QWebOSWindow::QWebOSWindow(QWebOSIpcClient *ipcClient, WebosSurfaceManagerClient *client, QWidget *widget, QWebOSScreen *screen)
     : QPlatformWindow(widget),
       OffscreenNativeWindow(widget->width(), widget->height()),
       m_screen(screen),

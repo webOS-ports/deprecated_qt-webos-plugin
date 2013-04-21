@@ -61,7 +61,6 @@ QStringList QWebOSIntegrationPlugin::keys() const
 
 QPlatformIntegration* QWebOSIntegrationPlugin::create(const QString& system, const QStringList& paramList)
 {
-    qDebug() << __PRETTY_FUNCTION__ << "****" << system << paramList;
     Q_UNUSED(paramList);
     return new QWebOSIntegration();
 }

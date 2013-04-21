@@ -117,7 +117,6 @@ void QWebOSWindow::handleFocus(bool focused)
 
 void QWebOSWindow::handleResize(int width, int height, bool resizeBuffer)
 {
-    qDebug() << __PRETTY_FUNCTION__ << "width =" << width << "height =" << height;
     Q_UNUSED(resizeBuffer)
     setGeometry(QRect(0, 0, width, height));
 }
@@ -239,8 +238,6 @@ PIpcChannel* QWebOSWindow::channel() const
 
 void QWebOSWindow::setVisible(bool visible)
 {
-    qDebug() << __PRETTY_FUNCTION__;
-
     if (!m_isWebAppMgr) {
         if(!channel()) {
             qWarning() << "not connected to window manager...";

@@ -52,8 +52,6 @@ QWebOSIntegration::QWebOSIntegration()
       m_primaryScreen(0),
       m_ipcClient(0)
 {
-    qDebug() << __PRETTY_FUNCTION__;
-
     m_clipboard = new QWebOSClipboard();
 
     m_primaryScreen = new QWebOSScreen();
@@ -61,11 +59,9 @@ QWebOSIntegration::QWebOSIntegration()
 
     // Only create IPC client when we're not running in context of the webappmanager
     if (::getenv("QT_WEBOS_WEBAPPMGR") == 0) {
-        qDebug() << __PRETTY_FUNCTION__ << "Not running in context of webappmanager";
         m_context = g_main_context_default();
         m_mainLoop = g_main_loop_new(m_context, TRUE);
         m_ipcClient = new QWebOSIpcClient(m_mainLoop);
-        qDebug() << __PRETTY_FUNCTION__ << "Not running in context of webappmanager 2";
     }
 
     QWebOSGLContext::initialize(EGL_DEFAULT_DISPLAY);
@@ -94,7 +90,6 @@ QPixmapData *QWebOSIntegration::createPixmapData(QPixmapData::PixelType type) co
 
 QPlatformWindow *QWebOSIntegration::createPlatformWindow(QWidget *widget, WId winId) const
 {
-    qDebug() << __PRETTY_FUNCTION__;
     Q_UNUSED(winId);
     return new QWebOSWindow(m_ipcClient, &m_surfaceClient, widget, m_primaryScreen);
 }

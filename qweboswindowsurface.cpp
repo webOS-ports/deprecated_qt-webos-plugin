@@ -35,22 +35,18 @@ public:
     QWebOSPaintDevice(QWebOSGLContext* platformGLContext)
         : m_platformGLContext(platformGLContext)
     {
-        qDebug()<<__PRETTY_FUNCTION__;
         m_context = QGLContext::fromPlatformGLContext(m_platformGLContext);
     }
 
     QSize size() const {
-        qDebug()<<__PRETTY_FUNCTION__;
         return m_platformGLContext->surfaceSize();
     }
 
     QGLContext* context() const {
-        qDebug()<<__PRETTY_FUNCTION__;
         return m_context;
     }
 
     QPaintEngine *paintEngine() const {
-        qDebug()<<__PRETTY_FUNCTION__;
         return qt_qgl_paint_engine();
     }
 
@@ -62,8 +58,6 @@ private:
 QWebOSGLWindowSurface::QWebOSGLWindowSurface(QWebOSScreen *screen, QWidget *window)
     : QWindowSurface(window)
 {
-    qDebug() << __PRETTY_FUNCTION__;
-
     m_platformGLContext = static_cast<QWebOSGLContext*>(window->platformWindow()->glContext());
     m_paintDevice = new QWebOSPaintDevice(m_platformGLContext);
     m_screen = screen;

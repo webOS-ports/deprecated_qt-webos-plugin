@@ -29,14 +29,11 @@ QT_BEGIN_NAMESPACE
 QWebOSIpcClient::QWebOSIpcClient(GMainLoop *loop)
     : PIpcClient("sysmgr", "webos-client", loop)
 {
-    qDebug() << __PRETTY_FUNCTION__;
     g_main_loop_run(mainLoop());
-    qDebug() << __PRETTY_FUNCTION__ << "2";
 }
 
 void QWebOSIpcClient::serverConnected(PIpcChannel* channel)
 {
-    qDebug() << __PRETTY_FUNCTION__ << "IPC Server connected";
     g_main_loop_quit(mainLoop());
     setChannel(channel);
 }

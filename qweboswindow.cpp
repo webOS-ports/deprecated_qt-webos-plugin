@@ -50,6 +50,7 @@ void QWebOSWindow::setGeometry(const QRect& rect)
 void QWebOSWindow::setWinId(WId winId)
 {
     m_winid = winId;
+    this->identify(winId);
 }
 
 WId QWebOSWindow::winId() const

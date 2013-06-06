@@ -32,21 +32,19 @@ QT_BEGIN_NAMESPACE
 #include <SysMgrTouchEventTraits.h>
 
 #include <OffscreenNativeWindow.h>
+#include <WebosSurfaceManagerClient.h>
 
 typedef WId QWebOSWindowId;
 
-class WebosSurfaceManagerClient;
 class QWebOSScreen;
 class QWebOSGLContext;
 class QSystemSemaphore;
-class PIpcChannel;
-class QWebOSIpcClient;
 
 class QWebOSWindow : public QPlatformWindow,
                      public OffscreenNativeWindow
 {
 public:
-    QWebOSWindow(QWebOSIpcClient *ipcClient, WebosSurfaceManagerClient *client, QWidget *w, QWebOSScreen *screen);
+    QWebOSWindow(QWidget *w, QWebOSScreen *screen);
 
     virtual void setGeometry(const QRect &);
 
@@ -54,33 +52,17 @@ public:
     virtual void setWinId(WId winId);
 
     QPlatformGLContext *glContext() const;
-    void setVisible(bool visible);
 
     virtual void postBuffer(OffscreenNativeWindowBuffer *buffer);
     virtual void waitForBuffer(OffscreenNativeWindowBuffer *buffer);
 
     void createGLContext();
 
-public:
-    void handleFocus(bool focused);
-    void handleResize(int width, int height, bool resizeBuffer);
-    void handleFullScreenEnabled();
-    void handleFullScreenDisabled();
-    void handlePause();
-    void handleResume();
-    void handleInputEvent(const SysMgrEventWrapper& wrapper);
-    void handleTouchEvent(const SysMgrTouchEvent& touchEvent);
-    void handleKeyEvent(const SysMgrKeyEvent& keyEvent);
-    void handleBufferConsumed(int key);
-    PIpcChannel* channel() const; // Required by IPC_MESSAGE_FORWARD
-
 private:
     QWebOSScreen *m_screen;
     QWebOSGLContext *m_glcontext;
     WId m_winid;
-    WebosSurfaceManagerClient *m_client;
-    QWebOSIpcClient *m_ipcClient;
-    bool m_isWebAppMgr;
+    WebosSurfaceManagerClient m_surfaceClient;
     QSystemSemaphore *m_bufferSemaphore;
 };
 

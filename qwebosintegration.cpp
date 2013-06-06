@@ -17,7 +17,6 @@
 
 #include "qwebosintegration.h"
 
-#include "qwebosipcclient.h"
 #include "qweboswindow.h"
 #include "qweboswindowsurface.h"
 #include "qwebosglcontext.h"
@@ -57,13 +56,6 @@ QWebOSIntegration::QWebOSIntegration()
     m_primaryScreen = new QWebOSScreen();
     m_screens.append(m_primaryScreen);
 
-    // Only create IPC client when we're not running in context of the webappmanager
-    if (::getenv("QT_WEBOS_WEBAPPMGR") == 0) {
-        m_context = g_main_context_default();
-        m_mainLoop = g_main_loop_new(m_context, TRUE);
-        m_ipcClient = new QWebOSIpcClient(m_mainLoop);
-    }
-
     QWebOSGLContext::initialize(EGL_DEFAULT_DISPLAY);
 }
 
@@ -91,7 +83,7 @@ QPixmapData *QWebOSIntegration::createPixmapData(QPixmapData::PixelType type) co
 QPlatformWindow *QWebOSIntegration::createPlatformWindow(QWidget *widget, WId winId) const
 {
     Q_UNUSED(winId);
-    return new QWebOSWindow(m_ipcClient, &m_surfaceClient, widget, m_primaryScreen);
+    return new QWebOSWindow(widget, m_primaryScreen);
 }
 
 

@@ -20,8 +20,7 @@ SOURCES =   main.cpp \
             qwebosscreen.cpp \
             qwebosfontdatabase.cpp \
             qwebosglcontext.cpp \
-            qwebosnativeinterface.cpp \
-            qwebosipcclient.cpp
+            qwebosnativeinterface.cpp
 
 HEADERS =   qwebosintegration.h \
             qweboswindow.h \
@@ -29,8 +28,7 @@ HEADERS =   qwebosintegration.h \
             qwebosscreen.h \
             qwebosfontdatabase.h \
             qwebosglcontext.h \
-            qwebosnativeinterface.h \
-            qwebosipcclient.h
+            qwebosnativeinterface.h
 
 # EGL convenience
 INCLUDEPATH += eglconvenience/

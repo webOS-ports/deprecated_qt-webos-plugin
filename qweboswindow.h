@@ -26,19 +26,12 @@ QT_BEGIN_NAMESPACE
 
 #include <EGL/eglhybris.h>
 
-#include <SysMgrEvent.h>
-#include <SysMgrDefs.h>
-#include <SysMgrKeyEventTraits.h>
-#include <SysMgrTouchEventTraits.h>
-
 #include <OffscreenNativeWindow.h>
-#include <WebosSurfaceManagerClient.h>
 
 typedef WId QWebOSWindowId;
 
 class QWebOSScreen;
 class QWebOSGLContext;
-class QSystemSemaphore;
 
 class QWebOSWindow : public QPlatformWindow,
                      public OffscreenNativeWindow
@@ -53,17 +46,15 @@ public:
 
     QPlatformGLContext *glContext() const;
 
-    virtual void postBuffer(OffscreenNativeWindowBuffer *buffer);
-    virtual void waitForBuffer(OffscreenNativeWindowBuffer *buffer);
-
     void createGLContext();
+
+protected:
+    virtual unsigned int platformWindowId() { return m_winid; }
 
 private:
     QWebOSScreen *m_screen;
     QWebOSGLContext *m_glcontext;
     WId m_winid;
-    WebosSurfaceManagerClient m_surfaceClient;
-    QSystemSemaphore *m_bufferSemaphore;
 };
 
 QT_END_NAMESPACE

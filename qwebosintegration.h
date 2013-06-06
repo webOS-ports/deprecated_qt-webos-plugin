@@ -59,7 +59,6 @@ private:
     QWebOSScreen *m_primaryScreen;
     QWebOSClipboard *m_clipboard;
     QWebOSNativeInterface *m_nativeInterface;
-    WebosSurfaceManagerClient m_surfaceClient;
     GMainContext *m_context;
     GMainLoop *m_mainLoop;
     QWebOSIpcClient *m_ipcClient;

@@ -17,19 +17,12 @@
 
 #include <QtGui/QWindowSystemInterface>
 #include <QApplication>
-#include <QSystemSemaphore>
 #include <QElapsedTimer>
 #include <QDebug>
 
 #include "qweboswindow.h"
 #include "qwebosscreen.h"
 #include "qwebosglcontext.h"
-
-#include <WebosSurfaceManagerClient.h>
-
-#define MESSAGES_INTERNAL_FILE "SysMgrMessagesInternal.h"
-#include <PIpcMessageMacros.h>
-#include <PIpcChannel.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -40,8 +33,7 @@ QWebOSWindow::QWebOSWindow(QWidget *widget, QWebOSScreen *screen)
       OffscreenNativeWindow(widget->width(), widget->height()),
       m_screen(screen),
       m_glcontext(0),
-      m_winid(-1),
-      m_bufferSemaphore(0)
+      m_winid(-1)
 {
 }
 
@@ -79,25 +71,6 @@ void QWebOSWindow::createGLContext()
 
     if (m_glcontext == 0 && format.windowApi() == QPlatformWindowFormat::OpenGL)
         m_glcontext = new QWebOSGLContext( const_cast<QWebOSWindow*>(this) );
-}
-
-void QWebOSWindow::waitForBuffer(OffscreenNativeWindowBuffer *buffer)
-{
-    if (m_winid == -1)
-        return;
-
-    if (!m_bufferSemaphore)
-        m_bufferSemaphore = new QSystemSemaphore(QString("EGLWindow%1").arg(m_winid), 3, QSystemSemaphore::Create);
-
-    m_bufferSemaphore->acquire();
-}
-
-void QWebOSWindow::postBuffer(OffscreenNativeWindowBuffer *buffer)
-{
-    // Only post buffer when we have assigned a valid window id as otherwise
-    // the compositor can't associate the buffer with any active window
-    if (m_winid != -1)
-        m_surfaceClient.postBuffer(m_winid, buffer);
 }
 
 QT_END_NAMESPACE

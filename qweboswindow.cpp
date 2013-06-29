@@ -20,9 +20,13 @@
 #include <QElapsedTimer>
 #include <QDebug>
 
+#include <EGL/egl.h>
+
 #include "qweboswindow.h"
 #include "qwebosscreen.h"
 #include "qwebosglcontext.h"
+
+#include "WebosSurfaceManagerClient.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -30,11 +34,14 @@ QT_BEGIN_NAMESPACE
 
 QWebOSWindow::QWebOSWindow(QWidget *widget, QWebOSScreen *screen)
     : QPlatformWindow(widget),
-      OffscreenNativeWindow(widget->width(), widget->height()),
       m_screen(screen),
       m_glcontext(0),
-      m_winid(-1)
+      m_winid(-1),
+      m_webosEglWindow(0)
 {
+    WebosSurfaceManagerClient::CreateNativeWindow(m_webosEglWindow);
+    if(m_webosEglWindow)
+        m_webosEglWindow->resize(widget->width(), widget->height());
 }
 
 void QWebOSWindow::setGeometry(const QRect& rect)
@@ -47,15 +54,29 @@ void QWebOSWindow::setGeometry(const QRect& rect)
     QPlatformWindow::setGeometry(rect);
 }
 
+void QWebOSWindow::resize(int iNewWidth, int iNewHeight)
+{
+    /* Set the size of the window */
+    if(m_webosEglWindow)
+        m_webosEglWindow->resize(iNewWidth, iNewHeight);
+}
+
 void QWebOSWindow::setWinId(WId winId)
 {
     m_winid = winId;
-    this->identify(winId);
+
+    if(m_webosEglWindow)
+        m_webosEglWindow->identify(winId);
 }
 
 WId QWebOSWindow::winId() const
 {
     return m_winid;
+}
+
+EGLNativeWindowType QWebOSWindow::getEglWindow()
+{
+    return (EGLNativeWindowType)m_webosEglWindow;
 }
 
 QPlatformGLContext *QWebOSWindow::glContext() const

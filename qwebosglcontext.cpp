@@ -111,7 +111,7 @@ QWebOSGLContext::~QWebOSGLContext()
 void QWebOSGLContext::createSurface()
 {
     m_eglSurface = eglCreateWindowSurface(s_eglDisplay, m_eglConfig,
-                                          static_cast<ANativeWindow*>(m_platformWindow),
+                                          m_platformWindow->getEglWindow(),
                                           NULL);
 
     if (m_eglSurface == EGL_NO_SURFACE) {

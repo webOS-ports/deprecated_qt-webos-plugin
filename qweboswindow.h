@@ -24,27 +24,29 @@
 
 QT_BEGIN_NAMESPACE
 
-#include <EGL/eglhybris.h>
-
-#include <OffscreenNativeWindow.h>
+#include <EGL/egl.h>
 
 typedef WId QWebOSWindowId;
 
 class QWebOSScreen;
 class QWebOSGLContext;
+class IWebosEglWindow;
 
-class QWebOSWindow : public QPlatformWindow,
-                     public OffscreenNativeWindow
+class QWebOSWindow : public QPlatformWindow
 {
 public:
     QWebOSWindow(QWidget *w, QWebOSScreen *screen);
 
     virtual void setGeometry(const QRect &);
 
+    void resize(int iNewWidth, int iNewHeight);
+
     WId winId() const;
     virtual void setWinId(WId winId);
 
     QPlatformGLContext *glContext() const;
+
+    EGLNativeWindowType getEglWindow();
 
     void createGLContext();
 
@@ -55,6 +57,7 @@ private:
     QWebOSScreen *m_screen;
     QWebOSGLContext *m_glcontext;
     WId m_winid;
+    IWebosEglWindow *m_webosEglWindow;
 };
 
 QT_END_NAMESPACE

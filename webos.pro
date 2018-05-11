@@ -48,7 +48,7 @@ INCLUDEPATH += $$QT_BUILD_TREE/include/QtGui
 INCLUDEPATH += $$QT_BUILD_TREE/include/QtCore
 SOURCES += $$QT_SOURCE_TREE/src/gui/text/qfontengine_ft.cpp
 
-QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions
+QMAKE_CXXFLAGS += -fno-exceptions
 
 QMAKE_CLEAN += libqwebos.so
 
